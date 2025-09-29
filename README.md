@@ -1,70 +1,65 @@
-Products API
+# Products API
+
 A Node.js API built with Express and Sequelize for managing products and care-related items. This API provides complete CRUD operations with pagination support, connecting to a MySQL database with robust validation using Zod.
 
-📋 Table of Contents
-Features
+## 📋 Table of Contents
 
-Technologies Used
+- [Features](#-features)
+- [Technologies Used](#-technologies-used)
+- [Setup Instructions](#-setup-instructions)
+- [API Endpoints](#-api-endpoints)
+- [Postman Collection](#-postman-collection)
+- [Data Validation](#-data-validation)
+- [Error Handling](#-error-handling)
+- [Project Structure](#-project-structure)
+- [Usage Examples](#-usage-examples)
 
-Setup Instructions
+## 🚀 Features
 
-API Endpoints
+- **CRUD Operations**: Create, read, update, and delete products
+- **Pagination**: Efficient data retrieval with page-based navigation
+- **Search**: Filter products by name using search queries
+- **Input Validation**: Robust schema validation using Zod
+- **Health Monitoring**: API health check endpoint
+- **MySQL Integration**: Sequelize ORM for database operations
 
-Postman Collection
+## 🛠 Technologies Used
 
-Data Validation
+- **Node.js**: JavaScript runtime environment
+- **Express.js**: Web framework for Node.js
+- **Sequelize**: ORM for MySQL databases
+- **MySQL**: Database management system
+- **Zod**: Schema validation for the API
+- **Postman**: API testing tool (collection provided)
 
-Error Handling
+## ⚙️ Setup Instructions
 
-🚀 Features
-CRUD Operations: Create, read, update, and delete products
+### Prerequisites
 
-Pagination: Efficient data retrieval with page-based navigation
+- Node.js (v14 or higher)
+- MySQL Server
+- npm or yarn
 
-Search: Filter products by name using search queries
+### Installation
 
-Input Validation: Robust schema validation using Zod
+1. **Clone the repository**
 
-Health Monitoring: API health check endpoint
-
-MySQL Integration: Sequelize ORM for database operations
-
-🛠 Technologies Used
-Node.js: JavaScript runtime environment
-
-Express.js: Web framework for Node.js
-
-Sequelize: ORM for MySQL databases
-
-MySQL: Database management system
-
-Zod: Schema validation for the API
-
-Postman: API testing tool (collection provided)
-
-⚙️ Setup Instructions
-Prerequisites
-Node.js (v14 or higher)
-
-MySQL Server
-
-npm or yarn
-
-Installation
-Clone the repository
-
-bash
+```bash
 git clone <repository-url>
 cd products-api
-Install dependencies
+```
 
-bash
+2. **Install dependencies**
+
+```bash
 npm install
-Environment Configuration
+```
 
-Create a .env file in the root directory:
+3. **Environment Configuration**
 
-env
+Create a `.env` file in the root directory:
+
+```env
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=products_db
@@ -72,51 +67,66 @@ DB_USER=your_username
 DB_PASSWORD=your_password
 PORT=3000
 NODE_ENV=development
-Database Setup
+```
+
+4. **Database Setup**
 
 Create the database in MySQL:
 
-sql
+```sql
 CREATE DATABASE products_db;
-Run the application
+```
 
-bash
+5. **Run the application**
+
+```bash
 # Development mode
 npm run dev
 
 # Production mode
 npm start
-The API will be available at http://localhost:3000
+```
 
-📡 API Endpoints
-1. Health Check
-GET /health
+The API will be available at `http://localhost:3000`
+
+## 📡 API Endpoints
+
+### 1. Health Check
+
+**GET** `/health`
 
 Check if the API is running properly.
 
-Response:
+**Response:**
 
-json
+```json
 {
   "ok": true
 }
-2. Create a Product
-POST /api/v1/products
+```
+
+---
+
+### 2. Create a Product
+
+**POST** `/api/v1/products`
 
 Create a new product in the database.
 
-Request Body:
+**Request Body:**
 
-json
+```json
 {
   "name": "Glucose Monitor",
   "price": 199.99,
   "stock": 5,
   "description": "Bluetooth-enabled CGM"
 }
-Response:
+```
 
-json
+**Response:**
+
+```json
 {
   "id": 1,
   "name": "Glucose Monitor",
@@ -126,22 +136,25 @@ json
   "createdAt": "2025-09-29T07:26:17.000Z",
   "updatedAt": "2025-09-29T07:26:17.000Z"
 }
-3. List Products (with Pagination)
-GET /api/v1/products?page=1&pageSize=10&q=glucose
+```
+
+---
+
+### 3. List Products (with Pagination)
+
+**GET** `/api/v1/products?page=1&pageSize=10&q=glucose`
 
 Retrieve a paginated list of products with optional search.
 
-Query Parameters:
+**Query Parameters:**
 
-page (optional): Page number (default: 1)
+- `page` (optional): Page number (default: 1)
+- `pageSize` (optional): Number of items per page (default: 10)
+- `q` (optional): Search query to filter by product name
 
-pageSize (optional): Number of items per page (default: 10)
+**Response:**
 
-q (optional): Search query to filter by product name
-
-Response:
-
-json
+```json
 {
   "data": [
     {
@@ -161,16 +174,21 @@ json
     "hasNext": false
   }
 }
-4. Get Product by ID
-GET /api/v1/products/:id
+```
+
+---
+
+### 4. Get Product by ID
+
+**GET** `/api/v1/products/:id`
 
 Retrieve a specific product by its ID.
 
-Example Request: GET /api/v1/products/1
+**Example Request:** `GET /api/v1/products/1`
 
-Response:
+**Response:**
 
-json
+```json
 {
   "id": 1,
   "name": "Glucose Monitor",
@@ -180,22 +198,29 @@ json
   "createdAt": "2025-09-29T07:26:17.000Z",
   "updatedAt": "2025-09-29T07:26:17.000Z"
 }
-5. Update Product
-PATCH /api/v1/products/:id
+```
+
+---
+
+### 5. Update Product
+
+**PATCH** `/api/v1/products/:id`
 
 Update an existing product's information.
 
-Request Body:
+**Request Body:**
 
-json
+```json
 {
   "price": 179.99,
   "stock": 10,
   "description": "Discounted CGM"
 }
-Response:
+```
 
-json
+**Response:**
+
+```json
 {
   "id": 1,
   "name": "Glucose Monitor",
@@ -205,64 +230,65 @@ json
   "createdAt": "2025-09-29T07:26:17.000Z",
   "updatedAt": "2025-09-29T07:30:00.000Z"
 }
-6. Delete Product
-DELETE /api/v1/products/:id
+```
+
+---
+
+### 6. Delete Product
+
+**DELETE** `/api/v1/products/:id`
 
 Remove a product from the database.
 
-Example Request: DELETE /api/v1/products/1
+**Example Request:** `DELETE /api/v1/products/1`
 
-Response: 204 No Content
+**Response:** `204 No Content`
 
-🧪 Postman Collection
+## 🧪 Postman Collection
+
 A Postman collection is provided for testing the API endpoints. Import the collection to quickly test all available operations.
 
-Collection Features:
+**Collection Features:**
 
-Pre-configured requests for all endpoints
+- Pre-configured requests for all endpoints
+- Example request bodies
+- Environment variables setup
+- Test scripts for response validation
 
-Example request bodies
+## 🔒 Data Validation
 
-Environment variables setup
-
-Test scripts for response validation
-
-🔒 Data Validation
 The API uses Zod for comprehensive input validation:
 
-Product Creation: All fields are required and validated
+- **Product Creation**: All fields are required and validated
+- **Product Update**: Partial updates with validation for provided fields
+- **Query Parameters**: Pagination and search parameters validation
 
-Product Update: Partial updates with validation for provided fields
+**Validation Rules:**
 
-Query Parameters: Pagination and search parameters validation
+- `name`: String, required, min 1 character
+- `price`: Number, positive, required
+- `stock`: Integer, non-negative, required
+- `description`: String, optional
 
-Validation Rules:
+## ⚠️ Error Handling
 
-name: String, required, min 1 character
-
-price: Number, positive, required
-
-stock: Integer, non-negative, required
-
-description: String, optional
-
-⚠️ Error Handling
 The API provides consistent error responses:
 
-400 Bad Request: Invalid input data
+- **400 Bad Request**: Invalid input data
+- **404 Not Found**: Resource not found
+- **500 Internal Server Error**: Server-side issues
 
-404 Not Found: Resource not found
+**Error Response Format:**
 
-500 Internal Server Error: Server-side issues
-
-Error Response Format:
-
-json
+```json
 {
   "error": "Error message describing the issue"
 }
-📝 Project Structure
-text
+```
+
+## 📝 Project Structure
+
+```
 src/
 ├── controllers/     # Route controllers
 ├── models/         # Sequelize models
@@ -271,9 +297,13 @@ src/
 ├── validation/     # Zod schemas
 ├── config/         # Database configuration
 └── app.js          # Express application setup
-🎯 Usage Examples
-Creating a Product
-bash
+```
+
+## 🎯 Usage Examples
+
+### Creating a Product
+
+```bash
 curl -X POST http://localhost:3000/api/v1/products \
   -H "Content-Type: application/json" \
   -d '{
@@ -282,11 +312,36 @@ curl -X POST http://localhost:3000/api/v1/products \
     "stock": 3,
     "description": "Advanced insulin delivery system"
   }'
-Searching Products
-bash
+```
+
+### Searching Products
+
+```bash
 curl "http://localhost:3000/api/v1/products?page=1&pageSize=5&q=monitor"
-Updating a Product
-bash
+```
+
+### Updating a Product
+
+```bash
 curl -X PATCH http://localhost:3000/api/v1/products/1 \
   -H "Content-Type: application/json" \
   -d '{"price": 249.99}'
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+## 📧 Contact
+
+For questions or support, please open an issue in the repository.
+
+---
+
+**Happy Coding! 🚀**
